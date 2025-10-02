@@ -1,7 +1,6 @@
 #include "tokenize.h"
 #include "macro.h"
-#include <string>
-#include <cctype>
+#include <vector>
 
 using std::string;
 
@@ -11,14 +10,32 @@ void skipWhitespace(const std::string& input, int& pos) {
     }
 }
 
-template <typename Predicate>
-string readWhile(const std::string& input, int& pos, Predicate cond) {
+template <typename F>
+string readWhile(const std::string& input, int& pos, F cond) {
     string result;
     while (pos < (int)input.length() && cond(input[pos])) {
-        result += input[pos];
-        pos++;
+        result += input[pos++];
     }
     return result;
+}
+
+std::vector<Token> Tokenize::allTokens(const std::string& input)
+{
+    int pos = 0;
+    Token token;
+    std::vector<Token> collectionTokens;
+
+    while(true)
+    {
+        token = nextToken(input, pos);
+        if(token.type == TOKEN_TYPE_END_OF_FILE)
+        {
+            break;
+        }
+        collectionTokens.push_back(token);
+    }
+
+    return collectionTokens;
 }
 
 Token Tokenize::nextToken(const std::string& input, int& pos) {

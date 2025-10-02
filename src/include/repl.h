@@ -1,13 +1,14 @@
 #pragma once
+
 #include <iostream>
 #include <string>
 #include <cctype>
+#include "tokenize.h"
 
-class Parser {
+class REPL {
 public:
-    Parser();
-    ~Parser();
+    REPL();
+    ~REPL();
 
-    void parse(const std::string& input);
     void run();
 };

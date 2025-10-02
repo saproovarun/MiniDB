@@ -1,9 +1,11 @@
 #pragma once
+
 #include <string>
 #include <variant>
 #include <vector>
 
 enum TokenType {
+    TOKEN_TYPE_UNKNOWN,
     TOKEN_TYPE_SELECT,
     TOKEN_TYPE_FROM,
     TOKEN_TYPE_WHERE,
@@ -15,8 +17,7 @@ enum TokenType {
     TOKEN_TYPE_EQUALS,
     TOKEN_TYPE_STRING,
     TOKEN_TYPE_NUMBER,
-    TOKEN_TYPE_END_OF_FILE,
-    TOKEN_TYPE_UNKNOWN
+    TOKEN_TYPE_END_OF_FILE
 };
 
 typedef std::variant<std::string, int> TokenValue;
@@ -24,7 +25,7 @@ typedef std::variant<std::string, int> TokenValue;
 struct Token {
     TokenType type;
     TokenValue val;
-};  // <-- fixed missing semicolon
+};
 
 namespace Tokenize {
     Token nextToken(const std::string& input, int& pos);

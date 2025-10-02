@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(mini_db VERSION 0.1)
 
  add_library(mini_db_lib
-     src/parser.cpp
+     src/repl.cpp
+     src/tokenize.cpp
  )
 
 target_include_directories(mini_db_lib PUBLIC src/include)
